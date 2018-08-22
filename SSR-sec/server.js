@@ -15,7 +15,13 @@ let renderer = serverRenderer.createRenderer({
 })
 
 server.get('*', (req, res) => {
-    createApp().then(app => {
+    // console.log(req.url)  //查看跳转网址
+    let config = { url: req.url }
+    console.log(config)
+
+    // createApp()创建一个带有明确状态的promise对象
+    // config 参数传入到打包的bundle.server.js中 => 即也传到了entry-server,js导出的函数中
+    createApp(config).then(app => {
         // console.log(app)  => app是Vue实例
         renderer.renderToString(app, (err, html) => {
             res.end(html)

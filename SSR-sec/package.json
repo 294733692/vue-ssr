@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "webpack":"webpack --config ./webpack/webpack.server.js"
   },
   "author": "",
   "license": "ISC",
@@ -17,6 +18,7 @@
     "express": "^4.16.3",
     "vue": "^2.5.17",
     "vue-loader": "^15.4.0",
+    "vue-router": "^3.0.1",
     "vue-server-renderer": "^2.5.17",
     "vue-style-loader": "^4.1.2",
     "vue-template-compiler": "^2.5.17",

@@ -1,6 +1,7 @@
 <template>
     <div class="content">
         MY FIRST SSR DEMO
+        <router-view></router-view>
     </div>
 </template>
 
