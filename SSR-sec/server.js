@@ -5,6 +5,7 @@ const express = require('express');
 
 // const createApp = function () { }
 const createApp = require('./dist/bundle.server.js')['default']
+// console.log(createApp());
 
 let server = express()
 
