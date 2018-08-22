@@ -2,12 +2,11 @@
 const http = require('http')
 const serverRenderer = require('vue-server-renderer')
 const express = require('express');
-
-// const createApp = function () { }
 const createApp = require('./dist/bundle.server.js')['default']
-// console.log(createApp());
-
 let server = express()
+
+// 使用/代替当前目录下的dist
+server.use('/', express.static(__dirname + '/dist'))
 
 // 创建Renderer实例
 let renderer = serverRenderer.createRenderer({
@@ -17,13 +16,14 @@ let renderer = serverRenderer.createRenderer({
 server.get('*', (req, res) => {
     // console.log(req.url)  //查看跳转网址
     let config = { url: req.url }
-    console.log(config)
 
     // createApp()创建一个带有明确状态的promise对象
     // config 参数传入到打包的bundle.server.js中 => 即也传到了entry-server,js导出的函数中
     createApp(config).then(app => {
         // console.log(app)  => app是Vue实例
-        renderer.renderToString(app, (err, html) => {
+        renderer.renderToString(app, {
+            init: '<script src="/bundle.client.js"></script>'
+        }, (err, html) => {
             res.end(html)
         })
     })
