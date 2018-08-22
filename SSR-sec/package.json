@@ -1,0 +1,26 @@
+{
+  "name": "ssr-sec",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-polyfill": "^6.26.0",
+    "css-loader": "^1.0.0",
+    "express": "^4.16.3",
+    "vue": "^2.5.17",
+    "vue-loader": "^15.4.0",
+    "vue-server-renderer": "^2.5.17",
+    "vue-style-loader": "^4.1.2",
+    "vue-template-compiler": "^2.5.17",
+    "webpack": "^4.17.0",
+    "webpack-cli": "^3.1.0"
+  }
+}
