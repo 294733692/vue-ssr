@@ -18,7 +18,6 @@ server.get('/api/getMsg', (req, res) => {
 })
 
 server.get('*', (req, res) => {
-    // console.log(req.url)  //查看跳转网址
     let config = { url: req.url }
 
     // createApp()创建一个带有明确状态的promise对象
