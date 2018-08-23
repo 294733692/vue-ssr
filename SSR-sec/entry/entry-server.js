@@ -8,6 +8,21 @@ export default (config) => {
         let app = createApp();
         // 往$Router里面添加url
         app.$router.push(config.url)
-        resolve(app);
+        // 返回目标位置或是路由匹配的组件数组(是数组的定义/构造类，不是实例).通常在服务端渲染的数据预加载的时候。
+        let components = app.$router.getMatchedComponents()
+        if (components.length < 0) {
+            reject({ code: 500 })
+        }
+        // 上面返回的components是数组，所有使用promise.all对数据进行异步处理
+        Promise.all(components.map(component => {
+            if (component.serverRequest) {
+                // 返回并将app.$store传递给home组件的serverRequest，作为其参数.
+                return component.serverRequest(app.$store)
+            }
+        })).then(() => {
+            // 将state传递到server进行处理
+            config.state = app.$store.state
+            resolve(app)
+        })
     })
 }

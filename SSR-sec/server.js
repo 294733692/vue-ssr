@@ -13,6 +13,10 @@ let renderer = serverRenderer.createRenderer({
     template: require('fs').readFileSync('./index.template.html', 'utf-8')
 })
 
+server.get('/api/getMsg', (req, res) => {
+    res.end(" hello it's me!!!")
+})
+
 server.get('*', (req, res) => {
     // console.log(req.url)  //查看跳转网址
     let config = { url: req.url }
@@ -20,9 +24,13 @@ server.get('*', (req, res) => {
     // createApp()创建一个带有明确状态的promise对象
     // config 参数传入到打包的bundle.server.js中 => 即也传到了entry-server,js导出的函数中
     createApp(config).then(app => {
+        // 将entry-server传递过来的config.state转化为JSON格式
+        let state = JSON.stringify(config.state)
         // console.log(app)  => app是Vue实例
         renderer.renderToString(app, {
-            init: '<script src="/bundle.client.js"></script>'
+            init: '<script src="/bundle.client.js"></script>',
+            // 将接收到的state在index.template.html中执行
+            change: `<script>window.__INITIAL__STATE__ = ${state}</script>`
         }, (err, html) => {
             res.end(html)
         })
