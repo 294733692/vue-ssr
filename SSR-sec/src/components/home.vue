@@ -16,7 +16,7 @@ export default {
   serverRequest(store) {
     return store.dispatch("getMsg");
   },
-  // 不建议使用这种方法
+  // 页面数据有短暂的闪动,不建议使用
   // created() {
   //   this.$store.dispatch("getMsg");
   //   console.log(this.$store.state.msg);

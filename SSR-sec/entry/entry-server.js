@@ -21,6 +21,10 @@ export default (config) => {
             }
         })).then(() => {
             // 将state传递到server进行处理
+            // 在所有预存钩子,resolve后
+            // 我们的strore现在已经填充入渲染应用程序所需的状态
+            // 当将状态附加到上下文,并且`template`选项用于renderer是
+            // 状态将 自动序列化为`window.__INITIAL__STATE__`,并注入html  ==> 指向entry-server.js
             config.state = app.$store.state
             resolve(app)
         })

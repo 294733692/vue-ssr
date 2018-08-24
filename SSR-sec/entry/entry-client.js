@@ -2,7 +2,8 @@ import createApp from '../src/main'
 
 let app = createApp();
 
-// 将预存到服务端的数据，读取，替换掉
+// 当使用template时，config.state作为window.__INITIAL__STATE__状态，自动嵌入到最终的html中。
+// 而在客户端中，在挂载到应用程序之前，store就应该获取到状态码。
 if (window.__INITIAL__STATE__) {
     app.$store.replaceState(window.__INITIAL__STATE__)
 }
